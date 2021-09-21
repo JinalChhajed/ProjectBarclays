@@ -15,16 +15,16 @@ CREATE TABLE `customer` (
   `pan_number` varchar(10) unique,      
   `account_type` varchar(20) ,
   `pan_image` blob DEFAULT NULL,
-  `Adhar_image` blob DEFAULT NULL,
-  `password` varchar(255) not null );
+  `Adhar_image` blob DEFAULT NULL);
   
   update customer
 set account_no=LPAD(FLOOR(RAND() * 9999999999.99), 10, '0');
 
-CREATE TABLE `manager` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `uname` char(25) DEFAULT NULL,
-  `pwd` char(25) DEFAULT NULL
+  `pwd` char(25) DEFAULT NULL,
+  `role` char(25) not null
 );
 INSERT INTO `manager` (`id`, `uname`, `pwd`) VALUES
 (1, 'John', 'password123');
@@ -61,15 +61,15 @@ update customer
 set cust_id=LPAD(FLOOR(RAND() * 999999.99), 6, '0');
 select * from customer;
 
-select * from manager;
+select * from user;
 
-ALTER TABLE manager 
+ALTER TABLE user 
 ADD CONSTRAINT MyPrimaryKey PRIMARY KEY (id);
 
 ALTER TABLE customer 
 ADD CONSTRAINT MyPrimaryKey PRIMARY KEY (cust_id);
 
-describe manager;
+describe user;
 CREATE TABLE `transaction` (
   `trans_id` int(11) primary key,
   `trans_ref` int(15) not null unique,
